@@ -19,12 +19,14 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+  env:
+      key1: ${{ secrets.ALL_ENV_FORCE_APP_DIR }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
       - name: Check secret values before using
-        run: echo ${{secrets.ALL_ENV_FORCE_APP_DIR}}
+        run: echo ${{env.key1}}
         
 #       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 #       - uses: actions/checkout@v2
