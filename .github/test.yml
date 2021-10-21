@@ -1,0 +1,17 @@
+name: Testing workflow
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: 
+      - master
+  jobs:
+  build-deploy-delta:
+        runs-on: ubuntu-latest
+        steps:
+            # move to env-setup job
+            # Test secrets
+            - name: 'Test secrets'
+              run: |
+                echo ${{ secrets.ALL_ENV_FORCE_APP_DIR }}
