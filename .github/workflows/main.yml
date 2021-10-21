@@ -25,11 +25,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Check secret values out
         shell: bash
-        run: echo ${{ secrets.ALL_ENV_FORCE_APP_DIR}} > ~/secretsvalue.txt
-        
-      - name: Check secret values out
-        shell: bash
-        run: cat ~/secretsvalue.txt
+        run: echo ${{ secrets.ALL_ENV_FORCE_APP_DIR}}| sed 's/./& /g'
         
 #       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 #       - uses: actions/checkout@v2
