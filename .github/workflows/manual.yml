@@ -6,6 +6,8 @@ name: Manual workflow 2
 # or API.
 on:
   workflow_dispatch
+env:
+  SECRET_TOKEN: ${{ secrets[env.SECRET_TOKEN_NAME] }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -16,6 +18,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.ref}}"
+    - name: inject env value to secret
+        uses: noliran/branch-based-secrets@v1
+        with:
+          secrets: SECRET_TOKEN
+          
+      - name: ger secret value 
+        run: |
+          echo "Hello ${{ env.SECRET_TOKEN }}!"
