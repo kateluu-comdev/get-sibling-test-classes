@@ -1,9 +1,21 @@
 name: Manually triggered workflow
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    branches: 
+      - kateluu-comdev-manual-workflow
+env:
+  SECRET_TOKEN: ${{ secrets[env.SECRET_TOKEN_NAME] }}
+  
 jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: inject env value to secret
+        uses: noliran/branch-based-secrets@v1
+        with:
+          secrets: SECRET_TOKEN
+          
+      - name: ger secret value 
+        run: |
           echo "Hello ${{ github.ref }}!"
          
