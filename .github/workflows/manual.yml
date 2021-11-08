@@ -6,8 +6,6 @@ name: Manual workflow 2
 # or API.
 on:
   workflow_dispatch
-env:
-  SECRET_TOKEN: ${{ secrets[env.SECRET_TOKEN_NAME] }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,5 +22,7 @@ jobs:
           secrets: SECRET_TOKEN
 
     - name: ger secret value 
+      env:
+        SECRET_TOKEN: ${{ secrets[env.SECRET_TOKEN_NAME] }}
       run: |
           echo "Hello ${{env.SECRET_TOKEN}}!"
