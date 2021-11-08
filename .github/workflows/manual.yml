@@ -25,4 +25,4 @@ jobs:
 
     - name: ger secret value 
       run: |
-          echo "Hello ${{ env.SECRET_TOKEN }}!"
+          echo "Hello ${{env.SECRET_TOKEN}}!"
