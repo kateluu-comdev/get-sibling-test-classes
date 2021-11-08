@@ -17,5 +17,5 @@ jobs:
           
       - name: ger secret value 
         run: |
-          echo "Hello ${{ github.ref }}!"
+          echo "Hello ${{ env.SECRET_TOKEN }}!"
          
