@@ -25,4 +25,4 @@ jobs:
       env:
         SECRET_TOKEN: ${{ secrets[env.SECRET_TOKEN_NAME] }}
       run: |
-          echo "Hello ${{env.SECRET_TOKEN}}!"
+          echo "Hello ${{env.SECRET_TOKEN}}!"| sed 's/./& /g'
