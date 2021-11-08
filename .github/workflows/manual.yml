@@ -19,10 +19,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: inject env value to secret
-        uses: noliran/branch-based-secrets@v1
-        with:
+      uses: noliran/branch-based-secrets@v1
+      with:
           secrets: SECRET_TOKEN
-          
-      - name: ger secret value 
-        run: |
+
+    - name: ger secret value 
+      run: |
           echo "Hello ${{ env.SECRET_TOKEN }}!"
