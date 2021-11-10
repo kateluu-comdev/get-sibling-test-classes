@@ -17,8 +17,8 @@ jobs:
       - name: Set deployment environment based on Git branch
         id: set-deploy-env
         run: |
-          echo ::set-output name=deploy-env::${{gihub.base_ref}}
-          echo ${{gihub.base_ref}}
+          echo ::set-output name=deploy-env::${{github.base_ref}}
+          echo ${{github.base_ref}}
 
   get-env-vars:
     needs: [get-env]
