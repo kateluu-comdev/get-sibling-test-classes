@@ -10,19 +10,12 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  greet:
+  get-env:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: inject env value to secret
-      uses: noliran/branch-based-secrets@v1
-      with:
-          secrets: SECRET_TOKEN
-
-    - name: ger secret value 
-      env:
-        SECRET_TOKEN: ${{ secrets[env.SECRET_TOKEN_NAME] }}
+    - name: Verify env information 
       run: |
-          echo "Hello ${{env.SECRET_TOKEN}}!"| sed 's/./& /g'
+          echo "Hello sf_username (aphaa) = ${{secrets.SF_USERNAME}}!"| sed 's/./& /g'
