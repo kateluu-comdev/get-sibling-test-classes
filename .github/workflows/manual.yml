@@ -9,13 +9,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.ref}}"
+    inject-branch-name-to-secrets:
+      runs-on: ubuntu-latest
+      steps: 
+      #############################################################################
+      ## Inject branch based secret values steps                                 ##
+      #############################################################################
+      - name: inject branch based secret values
+        uses: noliran/branch-based-secrets@v1
+        with:
+          secrets: SECRET_TOKEN, 
+                    SF_DEPLOY_URL
+      - name: access values
+        shell: bash
+        run: |
+          echo "name =  ${{secrets[env.SF_DEPLOY_URL_NAME]}}!"| sed 's/./& /g'
+          echo "to =  ${{secrets[env.SECRET_TOKEN_NAME]}}!"| sed 's/./& /g'
