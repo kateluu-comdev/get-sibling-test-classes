@@ -9,22 +9,60 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  get-env:
-    runs-on: ubuntu-latest
-    outputs:
-      deploy-env: ${{ steps.set-deploy-env.outputs.deploy-env }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set deployment environment based on Git branch
-        id: set-deploy-env
-        run: |
-          echo ::set-output name=deploy-env::${{github.base_ref}}
-          echo ${{github.base_ref}}
-
-  get-env-vars:
-    needs: [get-env]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Verify env information 
-      run: |
-          echo "Hello sf_username = ${{secrets.SF_USERNAME}}!"| sed 's/./& /g'
+    inject-branch-name-to-secrets:
+      runs-on: ubuntu-latest
+      steps: 
+      #############################################################################
+      ## Inject branch based secret values steps                                 ##
+      #############################################################################
+      - name: inject branch based secret values
+        uses: noliran/branch-based-secrets@v1
+        with:
+          secrets:  BPOINT_ENDPOINT_FOR_LICENCING,
+                    BPOINT_USERNAME_FOR_LICENCING,
+                    BPOINT_MERCHANTID_FOR_LICENCING,
+                    BPOINT_PASSWORD_FOR_LICENCING,
+                    BPOINT_USERNAME_FOR_OTHERS,
+                    BPOINT_MERCHANTID_FOR_OTHERS,
+                    BPOINT_PASSWORD_FOR_OTHERS,
+                    AWS_SERVICES_ENDPOINT,
+                    AWS_API_ENDPOINT,
+                    AWS_DECLARATIONS3_ENDPOINT,
+                    AWS_ACCESSKEY,
+                    AWS_ACCESSSECRET,
+                    AWS_ADJUDICATION_DECISION_BUCKET_NAME,
+                    SF_DEPLOY_PWD,
+                    SF_DEPLOY_TOKEN,
+                    SF_USERNAME,
+                    SF_PASSWORD,
+                    SF_DEPLOY_URL,
+                    SF_DEPLOY_URL_R,
+                    SF_MAXPOLL,
+                    MULSOFT_CUSTOMER_DOMAIN,
+                    MULESOFT_DOCUMENT_DOMAIN,
+                    MULESOFT_FINANCE_DOMAIN,
+                    BULK_ECM_DECLARATION_EMAIL,
+                    EMAIL_MERIDIO_DECLARATION,
+                    SF_SERVER,
+                    MYQBCC_SUB_DOMAIN,
+                    SFENV_NAME,
+                    PLS_PLUS_PROD,
+                    EMAIL_TO_SF_ENV,
+                    LINE_SEPARATOR,
+                    AWS_ENDPOINT_SVC,
+                    FIX_EMAIL_TO_CASE,
+                    RECORD_EMAIL_ADDRESS,
+                    TRUST_ACCOUNT_EMAIL,
+                    IPAAS_CERT,
+                    FORCE_APP_DIR,
+                    QUALTRICS_LICENSE_FEEDBACK_SURVEY_SEND_URL,
+                    QUALTRICS_EDR_SURVEY_SEND_URL,
+                    QUALTRICS_TRIGGER_SURVEY_SEND_URL,
+                    QUALTRICS_ONLINE_TRANSACTION_FEEDBACK_SURVEY_SEND_URL,
+                    QUALTRICS_INSURANCE_APPROVED_FEEDBACK_SURVEY_SEND_URL,
+                    QUALTRICS_INSURANCE_DECLINED_FEEDBACK_SURVEY_SEND_URL,
+                    QUALTRICS_IRU_SURVEY_SEND_URL,
+                    QUALTRICS_EMAIL_SERVICE_SURVEY_SEND_URL,
+                    QUALTRICS_C_SURVEY_SEND_URL,
+                    SFENV_NAME
+                    
