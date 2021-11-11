@@ -9,7 +9,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-    inject-branch-name-to-secrets:
+    inject-branch-name-to-secrets-main:
       runs-on: ubuntu-latest
       steps: 
       #############################################################################
@@ -18,8 +18,7 @@ jobs:
       - name: inject branch based secret values
         uses: noliran/branch-based-secrets@v1
         with:
-          secrets: SECRET_TOKEN, 
-                    SF_DEPLOY_URL
+          secrets: SECRET_TOKEN,SF_DEPLOY_URL
       - name: access values
         shell: bash
         run: |
